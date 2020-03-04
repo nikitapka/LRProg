@@ -3,12 +3,18 @@
 using namespace std;
 
 int main() {
-	int A, B;
-	cin >> A >> B;
-	if (B == 0) {
-		cout << "Impossible" << endl;
-	} else {
-		cout << (A / B) << endl;
+	double BasePrise, FirstPriseLimit, SecondPriceLimit, FirstDiscountValume, SecondDiscountValume;
+	cin >> BasePrise >> FirstPriseLimit >> SecondPriceLimit >> FirstDiscountValume >> SecondDiscountValume;
+
+	if (BasePrise > SecondPriceLimit) {
+		cout << BasePrise * (1 - SecondDiscountValume / 100) << endl;
 	}
+	else if (BasePrise > FirstPriseLimit) {
+		cout << BasePrise * (1 - FirstDiscountValume / 100) << endl;
+	}
+	else {
+		cout << BasePrise;
+	}
+
 	return 0;
 }
