@@ -1,23 +1,21 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
-#include <vector>
 
 using namespace std;
 
-int main() {
-	int N;
-	cin >> N;
-	vector<int> DEX;
-	while (N>=1)
-	{	
-		DEX.push_back(N % 2);
-		N /= 2;
-	}
-	size_t i=DEX.size();
-
-	for (i; i >= 1; --i)
-		{
-			cout << DEX[i-1];
-		}	
-	return 0;
+int main()
+{   
+    string x;
+    cin >> x;
+    string invariantX="";
+    int i=x.size()-1;
+    for(;i>=0;--i) {
+        invariantX+=x[i];
+    }
+    if (invariantX==x) {
+       cout << "true" << endl; 
+    } else {
+        cout<< "false"<< endl;
+    }
+    return 0;
 }
