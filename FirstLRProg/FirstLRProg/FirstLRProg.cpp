@@ -20,7 +20,8 @@ bool IsPalindrom(string x) {
 }
 
 vector<string> PalindromFilter(vector<string> &Words,int minLength) {
-    for (size_t i = 0; i < Words.size() ; i++) {
+    int i = Words.size()-1;
+    for (; i >= 0  ; --i) {
         if (Words[i].size() < minLength)
         {
             Words.erase(Words.begin() + i);
@@ -28,12 +29,12 @@ vector<string> PalindromFilter(vector<string> &Words,int minLength) {
         }
         else
         {
-            if (IsPalindrom(Words[i])) {
+            if (!IsPalindrom(Words[i])) {
                 Words.erase(Words.begin() + i);
             }
         }
-        return Words;
    }
+    return Words;
 }
 
 
@@ -44,7 +45,13 @@ int main()
     words.push_back("made");
     words.push_back("sskad");
     words.push_back("daddad");
-    words.push_back("q");
+    words.push_back("q");   
+    words.push_back("");
+    words.push_back("qwq");
+    words.push_back("madeedam");
+    words.push_back("skad");
+    words.push_back("dadbab");
+    words.push_back("q2332q");
     words.push_back("qwq");
 
     int minLength = 4;
