@@ -4,22 +4,6 @@
 
 using namespace std;
 
-vector<string> PalindromFilter(vector<string> Words,int minLength) {
-    for (size_t i = 0; i < (Words.size() - 1); ++i) {
-        if (Words[i].size() < minLength)
-        {
-            Words.erase(i);
-          
-        }
-        else
-        {
-            if (IsPalindrom(Words[i])) {
-                Words.erase(i);
-            }
-        }
-        return Words;
-   }
-}
 
 bool IsPalindrom(string x) {
     string inX = "";
@@ -35,6 +19,25 @@ bool IsPalindrom(string x) {
     }
 }
 
+vector<string> PalindromFilter(vector<string> &Words,int minLength) {
+    for (size_t i = 0; i < Words.size() ; i++) {
+        if (Words[i].size() < minLength)
+        {
+            Words.erase(Words.begin() + i);
+          
+        }
+        else
+        {
+            if (IsPalindrom(Words[i])) {
+                Words.erase(Words.begin() + i);
+            }
+        }
+        return Words;
+   }
+}
+
+
+
 int main()
 {   
     vector<string> words;
@@ -46,8 +49,9 @@ int main()
 
     int minLength = 4;
 
-    words=PalindromFilter(&words);
-
-    cout << IsPalindrom(x);
+    vector<string> wordsnew=PalindromFilter(words, 3);
+    for(size_t i = 0; i < wordsnew.size() ; i++){
+         cout << wordsnew[i]<<endl;
+    }
     return 0;
 }
