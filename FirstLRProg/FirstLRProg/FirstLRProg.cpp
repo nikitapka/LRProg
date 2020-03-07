@@ -1,64 +1,34 @@
-#include <iostream>
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
 
-bool IsPalindrom(string x) {
-    string inX = "";
-    int i = x.size() - 1;
-    for (; i >= 0; --i) {
-        inX += x[i];
+vector<int> Reversed(const vector<int>& v) {
+    vector<int> numbers = v;
+    if (!numbers.empty())
+    {
+        size_t i = numbers.size();
+        do {
+            --i;
+            numbers.push_back(numbers[i]);
+            numbers.erase(numbers.begin() + i);
+        } while (i > 0);
     }
-    if (inX == x) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return numbers;
 }
 
-vector<string> PalindromFilter(vector<string> &Words,int minLength) {
-    int i = Words.size()-1;
-    for (; i >= 0  ; --i) {
-        if (Words[i].size() < minLength)
-        {
-            Words.erase(Words.begin() + i);
-          
-        }
-        else
-        {
-            if (!IsPalindrom(Words[i])) {
-                Words.erase(Words.begin() + i);
-            }
-        }
-   }
-    return Words;
-}
-
-
-
-int main()
-{   
-    vector<string> words;
-    words.push_back("made");
-    words.push_back("sskad");
-    words.push_back("daddad");
-    words.push_back("q");   
-    words.push_back("");
-    words.push_back("qwq");
-    words.push_back("madeedam");
-    words.push_back("skad");
-    words.push_back("dadbab");
-    words.push_back("q2332q");
-    words.push_back("qwq");
-
-    int minLength = 4;
-
-    vector<string> wordsnew=PalindromFilter(words, 3);
-    for(size_t i = 0; i < wordsnew.size() ; i++){
-         cout << wordsnew[i]<<endl;
+int main() {
+    int NumberOperation;
+    string Operation;
+    int argument;
+    cin >> NumberOperation;
+    vector<string> AvailableOperations = { "WORRY" }
+    for (int i; i < NumberOperation; i++)
+    {
+        cin >> Operation;
+        
     }
     return 0;
 }
