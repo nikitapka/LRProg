@@ -5,75 +5,74 @@
 
 using namespace std;
 
-
-void NextMounth(int& CurrentMounth) {
-	if (CurrentMounth < 11) {
-		CurrentMounth++;
-	}
-	else
+void NewBus(map<string,vector<string>> m) {
+	string bus;
+	int CounterStops;
+	cin >> bus >> CounterStops;
+	for  (int i = 0; i < CounterStops; i++)
 	{
-		CurrentMounth = 0;
+		string stop;
+		cin >> stop;
+		m[bus].push_back(stop);
 	}
 }
 
-void RefreshMounth(vector<string>& v, const int& CurrentMounth) {
-	vector<int> Mounths = { 31,28,31,30,31,30,31,31,30,31,30,31 };
-	int NumberDays = Mounths[CurrentMounth];
-	//if (v.empty())
-	//{
-	//	v.resize(NumberDays);
-	//}
-	/*else
-	{*/
-		while (v.size() < NumberDays)
-		{
-			v.resize(NumberDays);
+map<string, vector<string>> ReverseMap(const map<string, vector<string>>& source) {
+	map<string, vector<string>> result;
+	bool findresult;
+	for (auto& firstElements : source) {
+		for (auto& secondElements : firstElements.second) {
+			findresult = false;
+			for (auto& Telements : result[secondElements]) {
+				if (Telements==firstElements.first) {
+					findresult = true;
+				}
+			}
+			if (!findresult)
+			{
+				result[secondElements].push_back(firstElements.first);
+			}
 		}
-
-		while (v.size() > NumberDays)
-		{
-		//	v[v.size - 2] += " ";
-			v[v.size() - 2] += v[v.size() - 1];
-			v.pop_back();
-		}
-	//}
+	}
+	return result;
 }
 
-void ChangeMounth(vector<string>& v, int& CurrentMounth) {
-	NextMounth(CurrentMounth);
-	RefreshMounth(v, CurrentMounth);
+void PrintAllBusForStop(map<string, vector<string>> m) {
+	string stop;
+	cin >> stop;
+	map<string, vector<string>> ReverseM = ReverseMap(m);
+	if (ReverseM.count(stop)==0)
+	{
+		cout << "No stop" << endl;
+	}
+	else {
+		
+	}
 }
 
-void AddRecord(vector<string>& v, int NumberDay) {
-	string Record;
-	cin << Record;
-	v[NumberDay - 1] += (Record + " ");
-}
+//void PrintAllStopForBus(map<string, vector<string>> m) {
+//
+//}
+//
+//void PrintAllBus(map<string, vector<string>> m) {
+//
+//}
 
 int main() {
-	int NumberOperations;
-	cin >> NumberOperations >> endl;
+	int n;
+	cin >> n;
+	map<string, vector<string>> MainMapBuses;
 	string Operation;
-	int CurrentMounth = 0;
-	int NumberDay;
-	vector<string> Mounth();
-	RefreshMounth(Mounth, CurrentMounth);
-	for  (int i=0;  i< NumberOperations; i++)
+	for (int i = 0; i < n; i++)
 	{
 		cin >> Operation;
-		if (Operation="ADD")
+		if (Operation=="NEW_BUS")
 		{
-			cin >> NumberDay;
-			AddRecord(Mounth, NumberDay);
-		} 
-		else if (Operation = "NEXT") {
-			ChangeMounth(Mounth, CurrentMounth);
+			NewBus(MainMapBuses);
 		}
-		else if (Operation = "DUMP")
-		{
-			cout
-		}
+		else if (Operation=="BUSES_FOR_STOP") {
 
+		}
 
 	}
 	return 0;
