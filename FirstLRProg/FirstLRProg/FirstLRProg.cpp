@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void NewBus(map<string,vector<string>> m) {
+void NewBus(map<string,vector<string>>& m) {
 	string bus;
 	int CounterStops;
 	cin >> bus >> CounterStops;
@@ -15,6 +15,14 @@ void NewBus(map<string,vector<string>> m) {
 		cin >> stop;
 		m[bus].push_back(stop);
 	}
+}
+
+void PrintMap(const map<string,vector<string>>& m){
+    for (auto& Felement : m ){
+        for(auto& Selement: Felement.second){
+            cout<< Felement.first<<" : "<< Selement<<endl;
+        }
+    }
 }
 
 map<string, vector<string>> ReverseMap(const map<string, vector<string>>& source) {
@@ -37,7 +45,7 @@ map<string, vector<string>> ReverseMap(const map<string, vector<string>>& source
 	return result;
 }
 
-void PrintAllBusForStop(map<string, vector<string>> m) {
+void PrintAllBusForStop(const map<string, vector<string>>& m) {
 	string stop;
 	cin >> stop;
 	map<string, vector<string>> ReverseM = ReverseMap(m);
@@ -46,13 +54,40 @@ void PrintAllBusForStop(map<string, vector<string>> m) {
 		cout << "No stop" << endl;
 	}
 	else {
+	    cout<< ReverseM[stop].size();
+	    for (auto& elements:ReverseM[stop]){
+	        cout<<" "<< elements;
+	    }
 		
 	}
 }
 
-//void PrintAllStopForBus(map<string, vector<string>> m) {
-//
-//}
+
+
+void PrintAllStopForBus(const map<string, vector<string>>& m) {
+    string bus;
+    cin>> bus;
+ 	map<string, vector<string>> ReverseM = ReverseMap(m);
+    if (m.count(bus)==0) {
+        cout<< "No bus"<< endl;
+    } else {
+        for (const auto& Stop: m[bus]){
+           if (ReverseM[Stop].size()==1 && ReverseM[Stop][0]==bus){
+               cout<< "Stop "<< Stop <<": no interchange"<<endl; 
+           } else {
+               cout<< "Stop "<< Stop<<":"; 
+               for (auto& buses:ReverseM[Stop]){
+                   if(buses!=bus){
+                       cout<<" "<< buses;
+                   }
+               }
+               cout<<endl;
+           }
+        }
+    }
+}
+
+// IN PROGRESS
 //
 //void PrintAllBus(map<string, vector<string>> m) {
 //
@@ -71,7 +106,9 @@ int main() {
 			NewBus(MainMapBuses);
 		}
 		else if (Operation=="BUSES_FOR_STOP") {
-
+            PrintAllBusForStop(MainMapBuses);
+		} else if (Operation=="STOPS_FOR_BUS") {
+		    
 		}
 
 	}
